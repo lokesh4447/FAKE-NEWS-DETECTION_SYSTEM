@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up</title>
+    <style>
+      body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+          sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .header {
+        background-color: #4e54c8;
+        padding: 10px;
+        color: rgb(255, 255, 255);
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: absolute;
+        top: 0;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+      }
+
+      .logo img {
+        width: 60px;
+        height: 60px;
+        border-radius: 10%;
+        margin-left: 20px;
+      }
+
+      .nav-buttons {
+        display: flex;
+        align-items: center;
+        margin-right: 30px;
+      }
+
+      .nav-buttons a {
+        text-decoration: none;
+        color: rgb(255, 255, 255);
+        padding: 10px 15px;
+        border-radius: 4px;
+        margin: 0 5px;
+      }
+
+      .nav-buttons a:hover {
+        background-color: #c0c6f5;
+      }
+
+      .get-started button {
+        padding: 10px 20px;
+        border: none;
+        background-color: #f6ff33;
+        color: rgb(13, 13, 13);
+        font-size: 16px;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+
+      .get-started button:hover {
+        background-color: #f8ea14;
+      }
+
+      .signup-container {
+        background-color: white;
+        margin-top: 100px;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        width: 90%;
+      }
+
+      .signup-container h2 {
+        margin: 0 0 20px;
+        text-align: center;
+        font-size: 28px;
+        color: #333;
+      }
+
+      .signup-form {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .signup-form input[type="text"],
+      .signup-form input[type="email"],
+      .signup-form input[type="password"] {
+        border: none;
+        border-bottom: 2px solid #ccc;
+        background-color: #fcfcfc;
+        padding: 10px 0;
+        margin-bottom: 20px;
+        font-size: 16px;
+        outline: none;
+        width: 100%;
+      }
+
+      .signup-form input[type="otp"] {
+        border: none;
+        border-bottom: 2px solid #ccc;
+        background-color: #fcfcfc;
+        padding: 10px 0;
+        flex: 1;
+        font-size: 16px;
+        margin-bottom: 20px;
+        outline: none;
+        width: 100%;
+      }
+
+      .signup-form input[type="text"]:focus,
+      .signup-form input[type="email"]:focus,
+      .signup-form input[type="password"]:focus,
+      .signup-form input[type="otp"]:focus {
+        border-bottom-color: #4e54c8;
+      }
+
+      .signup-form button {
+        padding: 15px;
+        border: none;
+        border-radius: 4.5px;
+        background-color: #4e54c8;
+        margin-top: 30px;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        margin-bottom: 15px;
+        width: 100%;
+      }
+
+      .signup-form #verifyotp,
+      .signup-form #sendotp {
+        padding: 10px;
+        border: none;
+        border-radius: 4.5px;
+        background-color: #4e54c8;
+        color: white;
+        margin-bottom: 20px;
+        font-size: 14px;
+        cursor: pointer;
+        width: 80px;
+        margin-left: 5px;
+        margin-top: 0px;
+      }
+
+      .signup-form #submitBtn {
+        padding: 15px;
+        border: none;
+        border-radius: 4.5px;
+        background-color: #4e54c8;
+        margin-top: 30px;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        margin-bottom: 15px;
+        width: 100%;
+      }
+
+      .signup-form #submitBtn:disabled {
+        cursor: not-allowed;
+        background-color: #6c757d;
+        color: #fff;
+        border: 1px solid #6c757d;
+      }
+
+      .signup-form button:hover {
+        background-color: #393fa3;
+      }
+
+      .signup-form .login-link {
+        text-align: center;
+        font-size: 16px;
+      }
+
+      .signup-form .login-link a {
+        color: #4e54c8;
+        text-decoration: none;
+      }
+
+      .signup-form .login-link a:hover {
+        text-decoration: underline;
+      }
+
+      .otpdiv {
+        display: flex;
+        align-items: center;
+        width: 100%;
+      }
+
+      @media (max-width: 768px) {
+        .header {
+          padding: 10px;
+        }
+
+        .logo img {
+          width: 50px;
+          height: 50px;
+          border-radius: 10%;
+          margin-left: 20px;
+        }
+
+        .nav-buttons a {
+          padding: 8px 12px;
+          font-size: 14px;
+        }
+
+        .get-started button {
+          font-size: 14px;
+          padding: 8px 16px;
+        }
+
+        .signup-container {
+          max-width: 90%;
+        }
+
+        .signup-container h2 {
+          font-size: 24px;
+        }
+
+        .signup-form input[type="text"],
+        .signup-form input[type="email"],
+        .signup-form input[type="password"],
+        .signup-form input[type="otp"] {
+          font-size: 14px;
+        }
+
+        .signup-form button {
+          font-size: 14px;
+          padding: 12px;
+        }
+
+        .signup-form .login-link {
+          font-size: 14px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .header {
+          flex-direction: column;
+          align-items: center;
+          padding: 10px;
+        }
+
+        .nav-buttons {
+          margin-top: 10px;
+          flex-direction: column;
+        }
+
+        .nav-buttons a {
+          margin: 5px 0;
+        }
+
+        .signup-container {
+          margin: 70px auto;
+          padding: 20px;
+        }
+
+        .logo img {
+          width: 40px;
+          height: 40px;
+        }
+
+        .signup-container h2 {
+          font-size: 20px;
+        }
+
+        .signup-form input[type="text"],
+        .signup-form input[type="email"],
+        .signup-form input[type="password"],
+        .signup-form input[type="otp"] {
+          font-size: 14px;
+        }
+
+        .signup-form button {
+          font-size: 14px;
+          padding: 10px;
+        }
+
+        .signup-form .login-link {
+          font-size: 14px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="header">
+      <div class="logo">
+        <img
+          src="/static/fake-news-detection-rgb-color-icon-vector-36100894.jpg"
+          alt="Fake News Logo"
+        />
+      </div>
+      <div class="nav-buttons">
+        <a href="/login">Login</a>
+      </div>
+    </div>
+
+    <div class="signup-container">
+      <h2>Sign Up</h2>
+      <form class="signup-form" id="signupForm" method="POST">
+        <input type="text" id="fullname" placeholder="Full Name" required />
+        <input type="email" id="email" placeholder="Email" required />
+        <input type="password" id="password" placeholder="Password" required />
+        <div class="otpdiv">
+          <input
+            type="password"
+            id="confirmPassword"
+            placeholder="Confirm Password"
+            required
+          />
+          <button type="button" id="sendotp">Send</button>
+        </div>
+        <div class="otpdiv">
+          <input
+            type="text"
+            id="otp"
+            maxlength="6"
+            placeholder="Enter OTP"
+            required
+          />
+          <button type="button" id="verifyotp">Verify</button>
+        </div>
+        <button type="submit" id="submitBtn" disabled>Sign Up</button>
+        <div class="login-link">
+          <p>Already have an account? <a href="/login">Login</a></p>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const submitButton = document.getElementById("submitBtn");
+        const sendOtpButton = document.getElementById("sendotp");
+        const verifyOtpButton = document.getElementById("verifyotp");
+        const signupForm = document.getElementById("signupForm");
+
+        let otpVerified = false;
+
+        sendOtpButton.addEventListener("click", function () {
+          const email = document.getElementById("email").value.trim();
+          const fullname = document.getElementById("fullname").value.trim();
+          const password = document.getElementById("password").value.trim();
+          const confirmPassword = document
+            .getElementById("confirmPassword")
+            .value.trim();
+
+          if (!email || !fullname || !password || !confirmPassword) {
+            alert("Please fill out all fields.");
+            return;
+          }
+
+          if (password !== confirmPassword) {
+            alert("Passwords do not match.");
+            return;
+          }
+
+          sendOtpButton.textContent = "Sending";
+          sendOtpButton.style.backgroundColor = "goldenrod";
+          sendOtpButton.disabled = true;
+
+          fetch("/send-otp", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email: email, fullname: fullname }),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.success) {
+                sendOtpButton.textContent = "Sent";
+                sendOtpButton.style.backgroundColor = "green";
+                sendOtpButton.disabled = true;
+              } else {
+                alert("Error sending OTP. Please try again.");
+                sendOtpButton.textContent = "Send";
+                sendOtpButton.style.backgroundColor = "#4e54c8";
+                sendOtpButton.disabled = false;
+              }
+            })
+            .catch((error) => console.error("Error:", error));
+        });
+
+        verifyOtpButton.addEventListener("click", function () {
+          const otp = document.getElementById("otp").value.trim();
+          const email = document.getElementById("email").value.trim();
+
+          if (!otp) {
+            alert("Please enter the OTP.");
+            return;
+          }
+
+          verifyOtpButton.textContent = "Verifying";
+          verifyOtpButton.style.backgroundColor = "goldenrod";
+
+          fetch("/verify-otp", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ otp: otp, email: email }),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.success) {
+                otpVerified = true;
+                submitButton.disabled = false;
+                verifyOtpButton.textContent = "Verified";
+                verifyOtpButton.style.backgroundColor = "green";
+              } else {
+                alert("Invalid OTP. Please try again.");
+                verifyOtpButton.textContent = "Verify";
+                verifyOtpButton.style.backgroundColor = "#4e54c8";
+              }
+            })
+            .catch((error) => console.error("Error:", error));
+        });
+
+        signupForm.addEventListener("submit", function (event) {
+          event.preventDefault();
+          if (!otpVerified) {
+            alert("Please verify OTP before submitting the form.");
+            return;
+          }
+
+          const fullname = document.getElementById("fullname").value.trim();
+          const email = document.getElementById("email").value.trim();
+          const password = document.getElementById("password").value.trim();
+          const confirmPassword = document
+            .getElementById("confirmPassword")
+            .value.trim();
+
+          if (!fullname || !email || !password || !confirmPassword) {
+            alert("Please fill out all fields.");
+            return;
+          }
+
+          if (password !== confirmPassword) {
+            alert("Passwords do not match.");
+            return;
+          }
+
+          const formData = new FormData(signupForm);
+          fetch("/signup", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              fullname: fullname,
+              email: email,
+              password: password,
+            }),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.status === "success") {
+                window.location.href = "/login";
+              } else {
+                alert("Error signing up. Please try again.");
+              }
+            })
+            .catch((error) => console.error("Error:", error));
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fake News Detector</title>
+    <style>
+      body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+          sans-serif;
+        background-color: #f4f7f6;
+        margin: 0;
+        padding-top: 60px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        min-height: 100vh;
+      }
+
+      .header {
+        background-color: #4e54c8;
+        padding: 10px 20px;
+        color: white;
+        width: 100%;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+      }
+
+      .nav-buttons {
+        display: flex;
+        align-items: center;
+        margin-left: auto;
+        margin-right: 30px;
+      }
+
+      .nav-buttons a {
+        text-decoration: none;
+        color: black;
+        padding: 10px 15px;
+        border-radius: 4px;
+        margin: 0 5px;
+        display: inline-block;
+      }
+
+      .nav-buttons a:hover {
+        background-color: #c0c6f5;
+      }
+
+      .get-started {
+        margin-left: 20px;
+      }
+
+      .get-started button {
+        padding: 10px 15px;
+        border: none;
+        background-color: #ffca28;
+        color: rgb(13, 13, 13);
+        font-size: 16px;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+
+      .get-started button:hover {
+        background-color: #ffd54f;
+      }
+
+      .logo {
+        margin-right: auto;
+      }
+
+      .logo img {
+        width: 70px;
+        height: 70px;
+        border-radius: 10%;
+        margin-left: 20px;
+      }
+
+      .img-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 450px;
+        height: 300px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+
+      .img-container img {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+      }
+
+      .container {
+        background-color: #ffffff;
+        border-radius: 10px;
+        padding: 30px;
+        max-width: 600px;
+        width: 100%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        margin-top: 120px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+        text-align: left;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+      }
+
+      .form-group textarea {
+        resize: vertical;
+        height: 100px;
+      }
+
+      .submit-btn {
+        padding: 10px 20px;
+        background-color: #6e8efb;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      .submit-btn:hover {
+        background-color: #4e5ec7;
+      }
+
+      h2 {
+        color: rgb(245, 16, 12);
+        height: 50px;
+      }
+
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="header">
+      <div class="logo">
+        <img
+          src="/static/fake-news-detection-rgb-color-icon-vector-36100894.jpg"
+          alt="Logo"
+        />
+      </div>
+      <div class="nav-buttons">
+        <a href="/">Back</a>
+      </div>
+    </div>
+
+    <div class="container">
+      <h2>Fake News Detector</h2>
+      <form id="fake-news-form" method="POST" action="/predict">
+        <div class="form-group">
+          <label for="title">Title:</label>
+          <input type="text" id="title" name="title" required />
+        </div>
+        <div class="form-group">
+          <label for="description">Description:</label>
+          <textarea id="description" name="description" required></textarea>
+        </div>
+        <div class="form-group hidden" id="result-group">
+          <label for="result">Result:</label>
+          <input id="result" name="result" readonly />
+        </div>
+        <button type="submit" class="submit-btn">Submit</button>
+      </form>
+    </div>
+
+    <script>
+      document
+        .getElementById("fake-news-form")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const mytitle = document.getElementById("title").value.trim();
+          const mydes = document.getElementById("description").value.trim();
+          fetch("/predict", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ mytitle: mytitle, mydes: mydes }),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              const resultGroup = document.getElementById("result-group");
+              resultGroup.classList.remove("hidden");
+              document.getElementById("result").value = data.result;
+            })
+            .catch((error) => console.error("Error:", error));
+        });
+    </script>
+  </body>
+</html>

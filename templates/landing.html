@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Landing Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+      body {
+        font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f3f4f6;
+        color: #333;  
+        display: flex;
+        scroll-behavior: smooth;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 100vh;
+        text-align: center;
+      }
+
+      /* Header and Navigation Styles */
+      .header {
+        background-color: #4e54c8;
+        padding: 15px 30px;
+        color: white;
+        width: 100%;
+        display: flex;
+        scroll-behavior: smooth;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .nav-buttons {
+        display: flex;
+        align-items: center;
+        margin-right: 30px;
+      }
+
+      .nav-buttons a {
+        text-decoration: none;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 4px;
+        margin: 0 10px;
+        transition: background-color 0.3s;
+      }
+
+      .nav-buttons a:hover {
+        background-color: #c0c6f5;
+      }
+
+      .get-started button {
+        padding: 10px 20px;
+        border: none;
+        background-color: #f9ca24;
+        color: #2f2f2f;
+        font-size: 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .get-started button:hover {
+        background-color: #f6b93b;
+      }
+
+      .logo img {
+        width: 60px;
+        height: 60px;
+        border-radius: 10%;
+        margin-left: 20px;
+      }
+
+      /* Main Content Styles */
+      .main {
+        width: 100%;
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 0 20px;
+      }
+
+      .home-container {
+        background-color: #ced2f4;
+        padding: 50px 20px;
+        border-radius: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .home-heading {
+        font-weight: 700;
+        font-size: 2.8em;
+        color: #4e54c8;
+        margin-bottom: 20px;
+      }
+
+      .home-description {
+        font-size: 1.2em;
+        color: #555;
+        margin-bottom: 30px;
+      }
+
+      .home-get-started button {
+        padding: 12px 25px;
+        border: none;
+        background-color: #f9ca24;
+        color: #2f2f2f;
+        font-size: 18px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .home-get-started button:hover {
+        background-color: #f6b93b;
+      }
+
+      .features-container {
+        padding: 40px 20px;
+      }
+
+      .custom-heading {
+        font-size: 2.2em;
+        margin-bottom: 20px;
+        color: #4e54c8;
+      }
+
+      .custom-description {
+        font-size: 1.2em;
+        margin-bottom: 40px;
+        color: #555;
+      }
+
+      .features-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+      }
+
+      .feature-item {
+        text-align: center;
+        padding: 20px;
+        flex: 1;
+        max-width: 300px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        background-color: #ffffff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+      }
+
+      .feature-item:hover {
+        transform: translateY(-10px);
+      }
+
+      .feature-item img {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 15px;
+      }
+
+      .feature-item h3 {
+        color: #333;
+        margin-bottom: 10px;
+      }
+
+      .feature-item p {
+        color: #666;
+        font-size: 1em;
+      }
+
+      .about-container {
+        background-color: #ffffff;
+        padding: 40px 20px;
+        border-radius: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .about-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 30px;
+        text-align: left;
+      }
+
+      .about-item img {
+        border-radius: 50%;
+        width: 150px;
+        height: 150px;
+        margin-right: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .about-item div {
+        flex: 1;
+        padding: 10px;
+      }
+
+      .about-item h3 {
+        margin-bottom: 10px;
+        color: #4e54c8;
+      }
+
+      .about-item p {
+        color: #555;
+        line-height: 1.6;
+      }
+
+      footer {
+    background-color: #cbcdf5;
+    box-shadow: 0 -2px 4px rgba(10, 10, 10, 0.2);
+    text-align: center;
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.footer-column {
+    flex: 1;
+    margin: 10px;
+    min-width: 200px;
+}
+
+.footer-column h4 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: rgb(48, 48, 48);
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 10px;
+}
+
+.footer-column ul li a {
+    text-decoration: none;
+    color: rgb(48, 48, 48);
+    transition: color 0.3s ease;
+}
+
+.footer-column ul li a:hover {
+    color: #6d93d0;
+}
+
+.subscribe-form {
+    display: flex;
+    align-items: center;
+}
+
+.subscribe-form input[type="email"] {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin-right: 10px;
+    flex: 1;
+}
+
+.subscribe-form button {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #3366cc;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.subscribe-form button:hover {
+    background-color: #285bb5;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.social-icons a {
+    color: rgb(48, 48, 48);
+    font-size: 24px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #6d93d0;
+    transform: scale(1.1);
+}
+
+
+      @media (max-width: 768px) {
+        .header {
+          flex-direction: column;
+        }
+
+        .nav-buttons {
+          margin-top: 10px;
+          justify-content: center;
+        }
+
+        .about-item {
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+        }
+
+        .about-item img {
+          margin-bottom: 20px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .home-heading {
+          font-size: 2em;
+        }
+
+        .custom-heading {
+          font-size: 1.8em;
+        }
+
+        .home-get-started button,
+        .get-started button {
+          font-size: 16px;
+          padding: 10px 20px;
+        }
+
+        .about-item h3 {
+          font-size: 1.2em;
+        }
+
+        .about-item p {
+          font-size: 1em;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="header">
+      <div class="logo">
+        <img src="/static/fake-news-detection-rgb-color-icon-vector-36100894.jpg" alt="Your Logo" />
+      </div>
+      <div class="nav-buttons">
+        <a href="#home">Home</a>
+        <a href="#features">Features</a>
+        <a href="#aboutus">About Us</a>
+        <div class="get-started">
+          <button onclick="window.location.href='/login'">Get Started</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="main">
+      <section id="home">
+        <div class="home-container">
+          <div class="home-heading">
+            FAKE NEWS DETECTOR<br />
+            Created Using Artificial Intelligence
+          </div>
+          <div class="home-description">
+            Detect fake news with ease using our state-of-the-art AI technology.
+          </div>
+          <div class="home-get-started">
+            <button onclick="window.location.href='/login'">Get Started</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="features">
+        <div class="features-container">
+          <div class="custom-heading">
+            Why Our <span style="color: #f9ca24">NEWS DETECTOR</span> Is Better?
+          </div>
+          <p class="custom-description">
+            Designed with the end-user in mind, FAKE NEWS DETECTOR features an
+            intuitive interface and seamless user experience. Easy to navigate
+            and interact with, it empowers users to achieve more with minimal
+            effort.
+          </p>
+          <div class="features-row">
+            <div class="feature-item">
+              <img src="/static/approxlogo.webp" style="border-radius: 50%;" alt="Fast" />
+              <h3>Approxmiate</h3>
+              <p>
+                Appoximate estimated news with our optimized platform.
+              </p>
+            </div>
+            <div class="feature-item">
+              <img src="/static/userFriendlyV02.png" style="border-radius: 50%;" alt="Cost-Effective" />
+              <h3>User-Friendly</h3>
+              <p>
+                User-Friendly by Design, Delight by Experience.
+              </p>
+            </div>
+            <div class="feature-item">
+              <img src="/static/security.png" style="border-radius: 10%;" alt="Security" />
+              <h3>Security</h3>
+              <p>Your data is protected with top-notch security measures.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="aboutus">
+        <div class="about-container">
+          <div class="about-item">
+            <img src="/static/u.webp" alt="Team Member 1" />
+            <div>
+              <h3>Hari OM</h3>
+              <p>
+                "Developer and data researcher with expertise in frontend development and databases, integrating robust data management with seamless user experiences."
+              </p>
+            </div>
+          </div>
+          <div class="about-item">
+            <img src="/static/th.jpeg" alt="Team Member 2" />
+            <div>
+              <h3>Lokesh Reddy</h3>
+              <p>
+                "Data researcher with expertise in frontend development, blending analytical insights with user-focused design to drive impactful results."
+              </p>
+            </div>
+          </div>
+          <div class="about-item">
+            <img src="/static/u.webp" alt="Team Member 2" />
+            <div>
+              <h3>Sai Pranay Reddy</h3>
+              <p>
+                "Developer and data researcher with expertise in frontend development and databases, integrating robust data management with seamless user experiences."
+              </p>
+            </div>
+          </div>
+          <div class="about-item">
+            <img src="/static/th.jpeg" alt="Team Member 3" />
+            <div>
+              <h3>Vishweshwar Reddy</h3>
+              <p>
+                "Data researcher with expertise in frontend development, blending analytical insights with user-focused design to drive impactful results."
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <footer>
+      <div class="footer-container">
+          <div class="footer-column">
+              <h4>Quick Links</h4>
+              <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#aboutus">About Us</a></li>
+              </ul>
+          </div>
+          
+          <div class="footer-column">
+              <h4>Subscribe</h4>
+              <p>Enter your email to subscribe to our newsletter:</p>
+              <form class="subscribe-form">
+                  <input type="email" name="email" placeholder="Enter your email" required>
+                  <button type="submit">Subscribe</button>
+              </form>
+          </div>
+  
+          <div class="footer-column">
+              <h4>Follow Us</h4>
+              <div class="social-icons">
+                  <a href="https://github.com/yourprofile" target="_blank"><i class="bi bi-github"></i></a>
+                  <a href="https://www.linkedin.com/in/yourprofile" target="_blank"><i class="bi bi-linkedin"></i></a>
+                  <a href="https://wa.me/yournumber" target="_blank"><i class="bi bi-whatsapp"></i></a>
+                  <a href="https://www.instagram.com/yourprofile" target="_blank"><i class="bi bi-instagram"></i></a>
+                  <a href="https://www.instagram.com/yourprofile" target="_blank"><i class="bi bi-twitter-x"></i></i></a>
+                  <a href="https://www.instagram.com/yourprofile" target="_blank"><i class="bi bi-threads"></i></a>
+              </div>
+          </div>
+      </div>
+      <p><i class="bi bi-c-circle"></i> 2024 Fake news Detection. All rights reserved.</p>
+  </footer>
+  </body>
+</html>

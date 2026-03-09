@@ -243,12 +243,11 @@
 
 # if __name__ == '__main__':
 #     app.run(debug=True)
-import streamlit as st
+import os
 import pickle
 import numpy as np
 import pandas as pd
 from flask import Flask, render_template, request, flash, session, jsonify
-from pymongo import MongoClient
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.models import load_model
@@ -263,11 +262,9 @@ app = Flask(__name__, template_folder="templates", static_folder="static")
 app.config['SECRET_KEY'] = 'secret123'
 
 
-# ---------------- MongoDB ----------------
+# ---------------- MongoDB (Disabled for Render) ----------------
 
-client = MongoClient('mongodb://localhost:27017/')
-db = client['my_database']
-users_collection = db['users']
+users_collection = None
 
 
 # ---------------- OTP ----------------
@@ -317,6 +314,9 @@ def load_all():
 # ---------------- User ----------------
 
 def validate_user(username, password):
+
+    if users_collection is None:
+        return True
 
     user = users_collection.find_one(
         {"email": username, "password": password}
@@ -450,12 +450,6 @@ def signup():
         email = data.get('email')
         password = data.get('password')
 
-        users_collection.insert_one({
-            "fullname": fullname,
-            "email": email,
-            "password": password
-        })
-
         return jsonify({'status': 'success'})
 
 
@@ -475,7 +469,6 @@ def chat():
 
 @app.route('/update')
 def update():
-
     return render_template('update.html')
 
 
@@ -511,7 +504,8 @@ def predict():
     })
 
 
-# ---------------- Run ----------------
+# ---------------- Run for Render ----------------
 
-if __name__ == '__main__':
-    app.run(debug=False, use_reloader=False)
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
